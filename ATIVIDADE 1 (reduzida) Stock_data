@@ -1,0 +1,66 @@
+#AVISO: ESSE CÓDIGO TAMBÉM SE APLICA AO DATAFRAME Iris.csv, BASTA TROCAR AS VARIÁVEIS DE ABERTURA DO ARQUIVO E AS RESPECTIVAS COLUNAS.
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+
+barra = '-' * 25
+
+def analisar_coluna(Stock, column_name):
+    """
+    Analisar uma coluna do DataFrame.
+    Mostra a média, mediana, min, max, histograma, boxplot e outliers.
+    """
+    print(f"Analisando coluna: {column_name}")
+    
+    # Média
+    media = Stock[column_name].mean()
+    print(f"A média de Stock['{column_name}'] é: {media}")
+    print(barra)
+    
+    # Mediana
+    mediana = np.median(Stock[column_name])
+    print(f"A mediana de Stock['{column_name}'] é: {mediana}")
+    print(barra)
+    
+    # Mínimo e Máximo
+    min_val = Stock[column_name].min()
+    max_val = Stock[column_name].max()
+    print(f"O valor mínimo de Stock['{column_name}'] é: {min_val}")
+    print(f"O valor máximo de Stock['{column_name}'] é: {max_val}")
+    print(barra)
+    
+    # Histograma
+    plt.hist(Stock[column_name], bins=5, range=(min_val, max_val))
+    plt.title(f"Histograma de {column_name}")
+    plt.show()
+    
+    # Boxplot
+    sns.boxplot(x=Stock[column_name])
+    plt.title(f"Boxplot de {column_name}")
+    plt.show()
+    
+    # Outliers
+    media = Stock[column_name].mean()
+    std = Stock[column_name].std(ddof=1)
+    ponto_corte = std * 3
+    inf, sup = media - ponto_corte, media + ponto_corte
+    outliers = Stock[column_name][(Stock[column_name] < inf) | (Stock[column_name] > sup)]
+    
+    print(f"OUTLIERS em '{column_name}':\n{outliers}")
+    print(barra)
+
+
+def analisar_todas_as_colunas():
+    # Carregar os dados
+    Stock = pd.read_csv('stock_data.csv')
+    
+    # Analisar cada coluna relevante
+    for coluna in ['Open', 'High', 'Low', 'Close']:
+        analisar_coluna(Stock, coluna)
+
+
+# Chamada principal para analisar todas as colunas
+analisar_todas_as_colunas()
