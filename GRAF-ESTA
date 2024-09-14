@@ -1,0 +1,115 @@
+import numpy as NP
+import statistics as sts
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import seaborn as SNS
+import pandas as pd
+import scipy.stats 
+
+bar = '-' *25
+
+#TIME SERIES
+Stock = pd.read_csv('stock_data.csv')
+Iris = pd.read_csv('Iris.csv')
+
+#Stock['Date'] = pd.to_datetime(Stock['Date'])
+#print(Stock.head())
+
+#SNS.lineplot(data=Stock, x='Date', y='Open')
+#SNS.lineplot(data=Stock, x='Date', y='Close')
+#plt.show()
+
+#SNS.lineplot(data=Stock, x='Date', y='High')
+#SNS.lineplot(data=Stock, x='Date', y='Low')
+#plt.show()
+
+
+
+
+#GRAFICO DE DISPERSÃO
+#Representa a relação entre duas variáveis
+
+#print(Iris)
+
+
+#print(scipy.stats.spearmanr(x, y)) #Teste não-paramétrico (assimétrica)
+#print(scipy.stats.pearsonr(x, y)) #Teste paramétrico (dentro de certo parâmetro)
+
+
+#SNS.boxplot([Iris['SepalLengthCm'], Iris['SepalWidthCm']])
+#plt.xticks([0, 1], ['SepalLengthCm', 'SepalWidthCm'])
+#plt.show()
+
+iris1 = Iris[Iris['Species'] == 'Iris-setosa']
+iris2 = Iris[Iris['Species'] == 'Iris-versicolor']
+iris3 = Iris[Iris['Species'] == 'Iris-virginica']
+
+x1 = iris1['SepalLengthCm']
+y1 = iris1['SepalWidthCm']
+x2 = iris1['PetalLengthCm']
+y2 = iris1['PetalWidthCm']
+
+x3 = iris2['SepalLengthCm']
+y3 = iris2['SepalWidthCm']
+x4 = iris2['PetalLengthCm']
+y4 = iris2['PetalWidthCm']
+
+x5 = iris3['SepalLengthCm']
+y5 = iris3['SepalWidthCm']
+x6 = iris3['PetalLengthCm']
+y6 = iris3['PetalWidthCm']
+
+#print(iris1.head())
+
+
+#MATRIZ DE COORELAÇÃO = Serve para saber se as variaveis são preditivas ou não.
+qualquer_coisa = iris1.drop(columns=['Id', 'Species'])
+print(qualquer_coisa.head())
+corrmatrix = qualquer_coisa.corr()
+print(corrmatrix)
+
+qualquer_coisa1 = iris2.drop(columns=['Id', 'Species'])
+print(qualquer_coisa1.head())
+corrmatrix1 = qualquer_coisa1.corr()
+print(corrmatrix1)
+
+qualquer_coisa2 = iris3.drop(columns=['Id', 'Species'])
+print(qualquer_coisa2.head())
+corrmatrix2 = qualquer_coisa2.corr()
+print(corrmatrix2)
+
+# SNS.scatterplot(data=iris1, x=x1, y=y1)
+# plt.show()
+# SNS.scatterplot(data=iris1, x=x2, y=2)
+# plt.show()
+# SNS.scatterplot(data=iris1, x=x2, y=y1)
+# plt.show()
+# SNS.scatterplot(data=iris1, x=x1, y=y2)
+# plt.show()
+
+# SNS.scatterplot(data=iris1, x=x3, y=y3)
+# plt.show()
+# SNS.scatterplot(data=iris1, x=x4, y=4)
+# plt.show()
+# SNS.scatterplot(data=iris1, x=x3, y=y4)
+# plt.show()
+# SNS.scatterplot(data=iris1, x=x4, y=y3)
+# plt.show()
+
+# SNS.scatterplot(data=iris1, x=x5, y=y5)
+# plt.show()
+# SNS.scatterplot(data=iris1, x=x6, y=6)
+# plt.show()
+# SNS.scatterplot(data=iris1, x=x5, y=y6)
+# plt.show()
+# SNS.scatterplot(data=iris1, x=x6, y=y5)
+# plt.show()
+
+SNS.heatmap(corrmatrix, annot=True)
+plt.show()
+
+SNS.heatmap(corrmatrix1, annot=True)
+plt.show()
+
+SNS.heatmap(corrmatrix2, annot=True)
+plt.show()
