@@ -1,0 +1,49 @@
+import statistics as sts
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import seaborn as SNS
+import pandas as pd
+import scipy.stats
+
+barra = '-' *25
+
+Iris = pd.read_csv('Iris.csv')
+
+
+iris_Setosa = Iris[Iris['Species'] == 'Iris-setosa']
+iris_Versicolor = Iris[Iris['Species'] == 'Iris-versicolor']
+iris_Virginica = Iris[Iris['Species'] == 'Iris-virginica']
+
+compPetala_Setosa = iris_Setosa['PetalLengthCm']
+compPetala_Vesricolor = iris_Versicolor['PetalLengthCm']
+compPetala_Virginica = iris_Virginica['PetalLengthCm']
+
+
+compSepala_Setosa = iris_Setosa['SepalLengthCm']
+compSepala_Vesricolor = iris_Versicolor['SepalLengthCm']
+compSepala_Virginica = iris_Virginica['SepalLengthCm']
+
+SNS.scatterplot(data=iris_Setosa, x=compPetala_Setosa, y=compSepala_Setosa)
+plt.show()
+
+SNS.scatterplot(data=iris_Versicolor, x=compPetala_Vesricolor, y=compSepala_Vesricolor)
+plt.show()
+
+SNS.scatterplot(data=iris_Virginica, x=compPetala_Virginica, y=compSepala_Virginica)
+plt.show()
+
+# media_Setosa = compPetala_Setosa.mean()
+# media_Versicolor = compPetala_Vesricolor.mean()
+# media_Virginica = compPetala_Virginica.mean()
+
+# print(f'Média Setosa:  {round(media_Setosa, 2)} Cm')
+# print(barra)
+# print(f'Média Versicolor:  {round(media_Versicolor, 2)} Cm')
+# print(barra)
+# print(f'Média Virginica:  {round(media_Virginica, 2)} Cm')
+
+
+
+#print(scipy.stats.spearmanr(x, y)) #Teste não-paramétrico (assimétrica)
+#print(scipy.stats.pearsonr(x, y)) #Teste paramétrico (dentro de certo parâmetro)
+
