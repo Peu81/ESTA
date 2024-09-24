@@ -1,0 +1,86 @@
+
+
+
+import numpy as NP
+import seaborn as SNS
+from scipy import stats
+import pandas as pd
+import matplotlib.pyplot as plt
+
+barra = '-' * 25
+
+def estatisticas_por_especie(coluna, especie):
+    Iris = pd.read_csv('Iris.csv')
+
+    # Filtrar o dataframe pela espécie fornecida
+    grupo_especie = Iris[Iris['Species'] == especie]
+    
+    if grupo_especie.empty:
+        print(f"Espécie '{especie}' não encontrada no conjunto de dados.")
+        return
+
+    # Cálculo de estatísticas para a espécie específica
+    print(f"Estatísticas para a espécie: {especie}")
+    print(barra)
+    
+    # Cálculo de estatísticas
+    media = grupo_especie[coluna].mean()
+    mediana = NP.median(grupo_especie[coluna])
+    min_val = grupo_especie[coluna].min()
+    max_val = grupo_especie[coluna].max()
+
+    print(f"Média de {coluna}: {media}")
+    print(f"Mediana de {coluna}: {mediana}")
+    print(f"Min de {coluna}: {min_val}")
+    print(f"Max de {coluna}: {max_val}")
+    print(barra)
+    
+    # Histograma
+    plt.hist(grupo_especie[coluna], bins=4)
+    plt.title(f"Histograma de {coluna} para {especie}")
+    plt.show()
+
+    # Boxplot
+    SNS.boxplot(x=grupo_especie[coluna])
+    plt.title(f"Boxplot de {coluna} para {especie}")
+    plt.show()
+
+    # Outliers
+    media_grupo = grupo_especie[coluna].mean()
+    desvio_padrao = grupo_especie[coluna].std(ddof=1)
+    ponto_corte = desvio_padrao * 3
+    inf, sup = media_grupo - ponto_corte, media_grupo + ponto_corte
+    outliers = grupo_especie[coluna][(grupo_especie[coluna] < inf) | (grupo_especie[coluna] > sup)]
+    
+    print(f"Outliers de {coluna} para {especie}: {outliers}")
+    print(barra)
+
+    #Shapiro-wilk
+    est, p_valor = stats.shapiro(grupo_especie[coluna])
+    print(f'Estatística do teste: {est}')
+    print(f'Valor-p: {round(p_valor, 2)}')
+
+    if p_valor > 0.05:
+        print(f"Os dados de {coluna} seguem uma distribuição normal (não rejeitamos H0).")
+    elif p_valor < 0.05:
+        print(f"Os dados de {coluna} não seguem uma distribuição normal (rejeitamos H0).")
+
+# STATS IRIS_SETOSA
+estatisticas_por_especie('SepalLengthCm', 'Iris-setosa')
+# estatisticas_por_especie('SepalWidthCm', 'Iris-setosa')
+# estatisticas_por_especie('PetalLengthCm', 'Iris-setosa')
+# estatisticas_por_especie('PetalWidthCm', 'Iris-setosa')
+
+
+#STATS IRIS_VERSICOLOR
+# estatisticas_por_especie('SepalLengthCm', 'Iris-versicolor')
+# estatisticas_por_especie('SepalWidthCm', 'Iris-versicolor')
+# estatisticas_por_especie('PetalLengthCm', 'Iris-versicolor')
+# estatisticas_por_especie('PetalWidthCm', 'Iris-versicolor')
+
+
+# STATS IRIS_VIRGINICA
+# estatisticas_por_especie('SepalLengthCm', 'Iris-virginica')
+# estatisticas_por_especie('SepalWidthCm', 'Iris-virginica')
+# estatisticas_por_especie('PetalLengthCm', 'Iris-virginica')
+# estatisticas_por_especie('PetalWidthCm', 'Iris-virginica')
