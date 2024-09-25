@@ -1,0 +1,157 @@
+import statistics as sts
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import seaborn as SNS
+import pandas as pd
+import scipy.stats as stats
+
+
+barra = '-' *25
+
+Iris = pd.read_csv('Iris.csv')
+
+
+iris_Setosa = Iris[Iris['Species'] == 'Iris-setosa']
+iris_Versicolor = Iris[Iris['Species'] == 'Iris-versicolor']
+iris_Virginica = Iris[Iris['Species'] == 'Iris-virginica']
+
+compPetala_Setosa = iris_Setosa['PetalLengthCm']
+compPetala_Vesricolor = iris_Versicolor['PetalLengthCm']
+compPetala_Virginica = iris_Virginica['PetalLengthCm']
+
+
+compSepala_Setosa = iris_Setosa['SepalLengthCm']
+compSepala_Vesricolor = iris_Versicolor['SepalLengthCm']
+compSepala_Virginica = iris_Virginica['SepalLengthCm']
+
+#1 QUESTÃO: MEDIA DO COMP DAS PETALAS
+# media_Setosa = compPetala_Setosa.mean()
+# media_Versicolor = compPetala_Vesricolor.mean()
+# media_Virginica = compPetala_Virginica.mean()
+
+# print(f'Média Setosa:  {round(media_Setosa, 2)} Cm')
+# print(barra)
+# print(f'Média Versicolor:  {round(media_Versicolor, 2)} Cm')
+# print(barra)
+# print(f'Média Virginica:  {round(media_Virginica, 2)} Cm')
+
+#_______________________________________________________________
+
+
+#2A QUESTÃO: RELAÇÃO ENTRE COMPRIMENTO DA SEPALA E DA PETALA
+
+iris_Setosa = iris_Setosa.drop(columns=['Id','SepalWidthCm','PetalWidthCm','Species'])
+iris_Versicolor = iris_Versicolor.drop(columns=['Id','SepalWidthCm','PetalWidthCm','Species'])
+iris_Virginica = iris_Virginica.drop(columns=['Id','SepalWidthCm','PetalWidthCm','Species'])
+
+
+# SNS.scatterplot(data=iris_Setosa, x=compSepala_Setosa, y=compPetala_Setosa)
+# plt.title(f"Scatterplot Iris-setosa")
+# plt.show()
+# matriz_Setosa = iris_Setosa.corr()
+# plt.title(f"Heatmap Iris-setosa")
+# SNS.heatmap(matriz_Setosa, annot=True)
+# plt.show()
+
+
+# SNS.scatterplot(data=iris_Versicolor, x=compSepala_Vesricolor, y=compPetala_Vesricolor)
+# plt.title(f"Scatterplot Iris-versicolor")
+# plt.show()
+# matriz_Versicolor = iris_Versicolor.corr()
+# SNS.heatmap(matriz_Versicolor, annot=True)
+# plt.title(f"Heatmap Iris-versicolor")
+# plt.show()
+
+
+# SNS.scatterplot(data=iris_Virginica, x=compSepala_Virginica, y=compPetala_Virginica)
+# plt.title(f"Scatterplot Iris-virginica")
+# plt.show()
+# matriz_Virginica = iris_Virginica.corr()
+# SNS.heatmap(matriz_Virginica, annot=True)
+# plt.title(f"Heatmap Iris-virginica")
+# plt.show()
+
+
+# #SHAPIRO PARA IRIS SETOSA
+# stat, p_valor = stats.shapiro(iris_Setosa)
+
+# print(f'STATS: {round(stat, 2)}')
+# print(f'P-valor: {p_valor}')
+
+# if p_valor > 0.05:
+#     print("A amostra parece ter distribuição normal (não rejeitar H0)")
+# else:
+#     print("A amostra não parece ter distribuição normal (rejeitar H0)")
+
+# #ASSIMETRIA PARA IRIS SETOSA
+# assimetria_I_Setosa = stats.skew(iris_Setosa)
+# print(f'{assimetria_I_Setosa}')
+
+
+# #SPEARMAN PARA IRIS SETOSA
+# coef_S, p_valor = stats.spearmanr(compSepala_Setosa, compPetala_Setosa)
+
+# print(f"Coeficiente de correlação: {round(coef_S, 2)}")
+# print(f"Valor p: {p_valor}")
+
+# plt.hist(iris_Setosa, bins=5, range=(4.3, 5.8))
+# plt.show()
+
+#---------------------------------------------------------------------------------
+
+# #SAPHIRO PARA IRIS VERSICOLOR
+# stat, p_valor = stats.shapiro(iris_Versicolor)
+
+# print(f'STATS: {round(stat, 2)}')
+# print(f'P-valor: {p_valor}')
+
+
+# if p_valor > 0.05:
+#     print("A amostra parece ter distribuição normal (não rejeitar H0)")
+# else:
+#     print("A amostra não parece ter distribuição normal (rejeitar H0)")
+
+# # #ASSIMETRIA PARA IRIS VERSICOLOR
+# assimetria_I_Versicolor = stats.skew(iris_Versicolor)
+# print(assimetria_I_Versicolor)
+
+# # #SPEARMAN PARA IRIS VERSICOLOR
+# coef_S, p_valor = stats.spearmanr(compSepala_Vesricolor, compPetala_Vesricolor)
+
+# print(f"Coeficiente de correlação: {round(coef_S, 2)}")
+# print(f"Valor p: {p_valor}")
+
+# plt.hist(iris_Versicolor, bins=5, range=(5, 7))
+# plt.show()
+
+#------------------------------------------------------------------------------
+
+# #SAPHIRO PARA IRIS VIRGINICA
+# stat, p_valor = stats.shapiro(iris_Virginica)
+
+# print(f'STATS: {round(stat, 2)}')
+# print(f'P-valor: {round(p_valor, 2)}')
+
+# if p_valor > 0.05:
+#     print("A amostra parece ter distribuição normal (não rejeitar H0)")
+# else:
+#     print("A amostra não parece ter distribuição normal (rejeitar H0)")
+
+
+# # # #ASSIMETRIA PARA IRIS VIRGINICA
+# assimetria_I_Virginica = stats.skew(iris_Virginica)
+# print('Assimetria Virginica = ', assimetria_I_Virginica)
+
+# curtose_I_Virginica = stats.kurtosis(iris_Virginica)
+# print('Curtose Virginica = ', curtose_I_Virginica)
+
+# coef_P, p_valor = stats.pearsonr(compSepala_Virginica, compPetala_Virginica)
+# print(f"Coeficiente de correlação: {round(coef_P)}")
+# print(f"Valor p: {p_valor}")
+
+# plt.hist(iris_Virginica, bins=5, range=(4.9,7.9))
+# plt.show()
+
+#print(scipy.stats.spearmanr(x, y)) #Teste não-paramétrico (assimétrica)
+#print(scipy.stats.pearsonr(x, y)) #Teste paramétrico (dentro de certo parâmetro)
+
