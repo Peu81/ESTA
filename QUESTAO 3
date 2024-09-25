@@ -1,6 +1,3 @@
-
-
-
 import numpy as NP
 import seaborn as SNS
 from scipy import stats
@@ -8,17 +5,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 barra = '-' * 25
-
 def estatisticas_por_especie(coluna, especie):
     Iris = pd.read_csv('Iris.csv')
-
     # Filtrar o dataframe pela espécie fornecida
     grupo_especie = Iris[Iris['Species'] == especie]
     
     if grupo_especie.empty:
         print(f"Espécie '{especie}' não encontrada no conjunto de dados.")
         return
-
     # Cálculo de estatísticas para a espécie específica
     print(f"Estatísticas para a espécie: {especie}")
     print(barra)
@@ -28,7 +22,6 @@ def estatisticas_por_especie(coluna, especie):
     mediana = NP.median(grupo_especie[coluna])
     min_val = grupo_especie[coluna].min()
     max_val = grupo_especie[coluna].max()
-
     print(f"Média de {coluna}: {media}")
     print(f"Mediana de {coluna}: {mediana}")
     print(f"Min de {coluna}: {min_val}")
@@ -36,15 +29,13 @@ def estatisticas_por_especie(coluna, especie):
     print(barra)
     
     # Histograma
-    plt.hist(grupo_especie[coluna], bins=4)
+    plt.hist(grupo_especie[coluna], bins=5, range=(min_val, max_val))
     plt.title(f"Histograma de {coluna} para {especie}")
     plt.show()
-
     # Boxplot
     SNS.boxplot(x=grupo_especie[coluna])
     plt.title(f"Boxplot de {coluna} para {especie}")
     plt.show()
-
     # Outliers
     media_grupo = grupo_especie[coluna].mean()
     desvio_padrao = grupo_especie[coluna].std(ddof=1)
@@ -54,33 +45,57 @@ def estatisticas_por_especie(coluna, especie):
     
     print(f"Outliers de {coluna} para {especie}: {outliers}")
     print(barra)
-
     #Shapiro-wilk
     est, p_valor = stats.shapiro(grupo_especie[coluna])
     print(f'Estatística do teste: {est}')
     print(f'Valor-p: {round(p_valor, 2)}')
-
     if p_valor > 0.05:
         print(f"Os dados de {coluna} seguem uma distribuição normal (não rejeitamos H0).")
+        assimetria = stats.skew(grupo_especie[coluna])
+        print(f'Assimetria de {coluna}:', assimetria)
+        plt.hist(grupo_especie[coluna], bins=30, color='lightblue', edgecolor='black')
+        plt.title(f'Histograma de {coluna} com Assimetria: {assimetria:.2f}')
+        plt.xlabel(coluna)
+        plt.ylabel('Frequência')
+        plt.show()
+
+        curtose = stats.kurtosis(grupo_especie[coluna])
+        print(f'Curtose {coluna}:', round(curtose,2))
+        plt.hist(grupo_especie[coluna], bins=30, color='lightblue', edgecolor='black')
+        plt.title(f'Histograma de {coluna} com Curtose: {curtose:.2f}')
+        plt.xlabel(coluna)
+        plt.ylabel('Frequência')
+        plt.tight_layout()
+    
+        # Exibir o gráfico
+        plt.show()
+
     elif p_valor < 0.05:
         print(f"Os dados de {coluna} não seguem uma distribuição normal (rejeitamos H0).")
 
+        assimetria = stats.skew(grupo_especie[coluna])
+        print(f'Assimetria de {coluna}:', assimetria)
+        plt.hist(grupo_especie[coluna], bins=30, color='lightblue', edgecolor='black')
+        plt.title(f'Histograma de {coluna} com Assimetria: {assimetria:.2f}')
+        plt.xlabel(coluna)
+        plt.ylabel('Frequência')
+        plt.show()
 # STATS IRIS_SETOSA
-estatisticas_por_especie('SepalLengthCm', 'Iris-setosa')
-# estatisticas_por_especie('SepalWidthCm', 'Iris-setosa')
-# estatisticas_por_especie('PetalLengthCm', 'Iris-setosa')
-# estatisticas_por_especie('PetalWidthCm', 'Iris-setosa')
+#estatisticas_por_especie('SepalLengthCm', 'Iris-setosa') #DISTRIBUIÇÃO SIMÉTRICA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.12) É MUITO PROXIMO DE ZERO, MAS SUA CURTOSE (-0.35) É BAIXA.
+#estatisticas_por_especie('SepalWidthCm', 'Iris-setosa') #DISTRIBUIÇÃO SIMÉTRICA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.01) É MUITO PRÓXIMO DE ZERO E A CURTOSE (0.69) ESTÁ ENTRE 0 E 1
+#estatisticas_por_especie('PetalLengthCm', 'Iris-setosa') #DISTRIBUIÇÃO SIMÉTRICA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.01) É MUITO PRÓXIMO DE ZERO E A CURTOSE (0.81) É PRÓXIMA DE 1.
+#estatisticas_por_especie('PetalWidthCm', 'Iris-setosa') #DISTRIBUIÇÃO ASSIMÉTRICA COM CAUDA À DIREITA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (1.16) É MAIOR QUE ZERO)
 
 
 #STATS IRIS_VERSICOLOR
-# estatisticas_por_especie('SepalLengthCm', 'Iris-versicolor')
-# estatisticas_por_especie('SepalWidthCm', 'Iris-versicolor')
-# estatisticas_por_especie('PetalLengthCm', 'Iris-versicolor')
-# estatisticas_por_especie('PetalWidthCm', 'Iris-versicolor')
+#estatisticas_por_especie('SepalLengthCm', 'Iris-versicolor') #DISTRIBUIÇÃO SIMÉTRICA COM UMA LEVE CAUDA À DIREITA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.10) É PRÓXIMO DE ZERO E A CURTOSE () É POSITIVA.
+#estatisticas_por_especie('SepalWidthCm', 'Iris-versicolor') #DISTRIBUIÇÃO ASSIMÉTRICA PARA A ESQUERDA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (-0.35) É MENOR QUE ZERO E SUA CURTOSE (-0.45) É NEGATIVA.
+#estatisticas_por_especie('PetalLengthCm', 'Iris-versicolor') #DISTRIBUIÇÃO ASSIMÉTRICA PARA A ESQUERDA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (-0.59) É MENOR QUE ZERO E SUA CURTOSE (-0.07) É NEGATIVA.
+#estatisticas_por_especie('PetalWidthCm', 'Iris-versicolor') # DISTRIBUIÇÃO SIMETRICA COM UMA LEVE CAUDA À ESQUERDA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (-0.03) É MENOR QUE ZERO E NÃO APRESENTA CURTOSE.
 
 
 # STATS IRIS_VIRGINICA
-# estatisticas_por_especie('SepalLengthCm', 'Iris-virginica')
-# estatisticas_por_especie('SepalWidthCm', 'Iris-virginica')
-# estatisticas_por_especie('PetalLengthCm', 'Iris-virginica')
-# estatisticas_por_especie('PetalWidthCm', 'Iris-virginica')
+#estatisticas_por_especie('SepalLengthCm', 'Iris-virginica') #DISTRIBUIÇÃO ASSIMETRICA PARA A DIREITA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.11) É LEVEMENTE MAIOR QUE ZERO E APRESENTA CURTOSE (-0.09) NEGATIVA.
+#estatisticas_por_especie('SepalWidthCm', 'Iris-virginica') #DISTRIBUIÇÃO ASSIMETRICA PARA A DIREITA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.35) É LEVEMENTE MAIOR QUE ZERO E APRESENTA CURTOSE (0.52) POSITIVA.
+#estatisticas_por_especie('PetalLengthCm', 'Iris-virginica') #DISTRIBUIÇÃO ASSIMETRICA PARA A DIREITA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.53) É MAIOR QUE ZERO E APRESENTA CURTOSE (-0.26) NEGATIVA.
+#estatisticas_por_especie('PetalWidthCm', 'Iris-virginica') #DISTRIBUIÇÃO ASSIMETRICA PARA A ESQUERDA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (-0.13) É MENOR QUE ZERO E APRESENTA CURTOSE (-0.66) NEGATIVA.
