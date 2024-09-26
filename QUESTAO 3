@@ -32,20 +32,20 @@ def estatisticas_por_especie(coluna, especie):
     plt.hist(grupo_especie[coluna], bins=5, range=(min_val, max_val))
     plt.title(f"Histograma de {coluna} para {especie}")
     plt.show()
-    # Boxplot
-    SNS.boxplot(x=grupo_especie[coluna])
-    plt.title(f"Boxplot de {coluna} para {especie}")
-    plt.show()
-    # Outliers
-    media_grupo = grupo_especie[coluna].mean()
-    desvio_padrao = grupo_especie[coluna].std(ddof=1)
-    ponto_corte = desvio_padrao * 3
-    inf, sup = media_grupo - ponto_corte, media_grupo + ponto_corte
-    outliers = grupo_especie[coluna][(grupo_especie[coluna] < inf) | (grupo_especie[coluna] > sup)]
+    # # Boxplot
+    # SNS.boxplot(x=grupo_especie[coluna])
+    # plt.title(f"Boxplot de {coluna} para {especie}")
+    # plt.show()
+    # # Outliers
+    # media_grupo = grupo_especie[coluna].mean()
+    # desvio_padrao = grupo_especie[coluna].std(ddof=1)
+    # ponto_corte = desvio_padrao * 3
+    # inf, sup = media_grupo - ponto_corte, media_grupo + ponto_corte
+    # outliers = grupo_especie[coluna][(grupo_especie[coluna] < inf) | (grupo_especie[coluna] > sup)]
     
-    print(f"Outliers de {coluna} para {especie}: {outliers}")
-    print(barra)
-    #Shapiro-wilk
+    # print(f"Outliers de {coluna} para {especie}: {outliers}")
+    # print(barra)
+    # #Shapiro-wilk
     est, p_valor = stats.shapiro(grupo_especie[coluna])
     print(f'Estatística do teste: {est}')
     print(f'Valor-p: {round(p_valor, 2)}')
@@ -81,21 +81,21 @@ def estatisticas_por_especie(coluna, especie):
         plt.ylabel('Frequência')
         plt.show()
 # STATS IRIS_SETOSA
-#estatisticas_por_especie('SepalLengthCm', 'Iris-setosa') #DISTRIBUIÇÃO SIMÉTRICA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.12) É MUITO PROXIMO DE ZERO, MAS SUA CURTOSE (-0.35) É BAIXA.
-#estatisticas_por_especie('SepalWidthCm', 'Iris-setosa') #DISTRIBUIÇÃO SIMÉTRICA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.01) É MUITO PRÓXIMO DE ZERO E A CURTOSE (0.69) ESTÁ ENTRE 0 E 1
-#estatisticas_por_especie('PetalLengthCm', 'Iris-setosa') #DISTRIBUIÇÃO SIMÉTRICA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.01) É MUITO PRÓXIMO DE ZERO E A CURTOSE (0.81) É PRÓXIMA DE 1.
-#estatisticas_por_especie('PetalWidthCm', 'Iris-setosa') #DISTRIBUIÇÃO ASSIMÉTRICA COM CAUDA À DIREITA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (1.16) É MAIOR QUE ZERO)
+# estatisticas_por_especie('SepalLengthCm', 'Iris-setosa') #DISTRIBUIÇÃO NORMAL E SIMÉTRICA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.12) É MUITO PROXIMO DE ZERO, MAS SUA CURTOSE (-0.35) É BAIXA.
+# estatisticas_por_especie('SepalWidthCm', 'Iris-setosa') #DISTRIBUIÇÃO NORMAL E SIMÉTRICA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.01) É MUITO PRÓXIMO DE ZERO E A CURTOSE (0.69) ESTÁ ENTRE 0 E 1
+# estatisticas_por_especie('PetalLengthCm', 'Iris-setosa') #DISTRIBUIÇÃO NORMAL E SIMÉTRICA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.01) É MUITO PRÓXIMO DE ZERO E A CURTOSE (0.81) É PRÓXIMA DE 1.
+# estatisticas_por_especie('PetalWidthCm', 'Iris-setosa') #DISTRIBUIÇÃO ANORMAL E ASSIMÉTRICA COM CAUDA À DIREITA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (1.16) É MAIOR QUE ZERO.
 
 
 #STATS IRIS_VERSICOLOR
-#estatisticas_por_especie('SepalLengthCm', 'Iris-versicolor') #DISTRIBUIÇÃO SIMÉTRICA COM UMA LEVE CAUDA À DIREITA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.10) É PRÓXIMO DE ZERO E A CURTOSE () É POSITIVA.
-#estatisticas_por_especie('SepalWidthCm', 'Iris-versicolor') #DISTRIBUIÇÃO ASSIMÉTRICA PARA A ESQUERDA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (-0.35) É MENOR QUE ZERO E SUA CURTOSE (-0.45) É NEGATIVA.
-#estatisticas_por_especie('PetalLengthCm', 'Iris-versicolor') #DISTRIBUIÇÃO ASSIMÉTRICA PARA A ESQUERDA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (-0.59) É MENOR QUE ZERO E SUA CURTOSE (-0.07) É NEGATIVA.
-#estatisticas_por_especie('PetalWidthCm', 'Iris-versicolor') # DISTRIBUIÇÃO SIMETRICA COM UMA LEVE CAUDA À ESQUERDA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (-0.03) É MENOR QUE ZERO E NÃO APRESENTA CURTOSE.
+# estatisticas_por_especie('SepalLengthCm', 'Iris-versicolor') #DISTRIBUIÇÃO NORMAL E SIMÉTRICA COM UMA LEVE CAUDA À DIREITA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.10) É PRÓXIMO DE ZERO E A CURTOSE () É POSITIVA.
+#estatisticas_por_especie('SepalWidthCm', 'Iris-versicolor') #DISTRIBUIÇÃO NORMAL E ASSIMÉTRICA PARA A ESQUERDA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (-0.35) É MENOR QUE ZERO E SUA CURTOSE (-0.45) É NEGATIVA.
+#estatisticas_por_especie('PetalLengthCm', 'Iris-versicolor') #DISTRIBUIÇÃO NORMAL E  ASSIMÉTRICA PARA A ESQUERDA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (-0.59) É MENOR QUE ZERO E SUA CURTOSE (-0.07) É NEGATIVA.
+#estatisticas_por_especie('PetalWidthCm', 'Iris-versicolor') # DISTRIBUIÇÃO ANORMAL E QUASE SIMETRICA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (-0.03) É MENOR QUE ZERO E NÃO APRESENTA CURTOSE.
 
 
 # STATS IRIS_VIRGINICA
-#estatisticas_por_especie('SepalLengthCm', 'Iris-virginica') #DISTRIBUIÇÃO ASSIMETRICA PARA A DIREITA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.11) É LEVEMENTE MAIOR QUE ZERO E APRESENTA CURTOSE (-0.09) NEGATIVA.
-#estatisticas_por_especie('SepalWidthCm', 'Iris-virginica') #DISTRIBUIÇÃO ASSIMETRICA PARA A DIREITA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.35) É LEVEMENTE MAIOR QUE ZERO E APRESENTA CURTOSE (0.52) POSITIVA.
-#estatisticas_por_especie('PetalLengthCm', 'Iris-virginica') #DISTRIBUIÇÃO ASSIMETRICA PARA A DIREITA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.53) É MAIOR QUE ZERO E APRESENTA CURTOSE (-0.26) NEGATIVA.
-#estatisticas_por_especie('PetalWidthCm', 'Iris-virginica') #DISTRIBUIÇÃO ASSIMETRICA PARA A ESQUERDA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (-0.13) É MENOR QUE ZERO E APRESENTA CURTOSE (-0.66) NEGATIVA.
+#estatisticas_por_especie('SepalLengthCm', 'Iris-virginica') #DISTRIBUIÇÃO NORMAL QUASE SIMETRICA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.11) É PROXIMO DE ZERO E APRESENTA CURTOSE (-0.09) NEGATIVA.
+#estatisticas_por_especie('SepalWidthCm', 'Iris-virginica') #DISTRIBUIÇÃO NORMAL E ASSIMETRICA PARA A DIREITA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.35) É MAIOR QUE ZERO E APRESENTA CURTOSE (0.52) POSITIVA.
+#estatisticas_por_especie('PetalLengthCm', 'Iris-virginica') #DISTRIBUIÇÃO NORMAL E ASSIMETRICA PARA A DIREITA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (0.53) É MAIOR QUE ZERO E APRESENTA CURTOSE (-0.26) NEGATIVA.
+#estatisticas_por_especie('PetalWidthCm', 'Iris-virginica') #DISTRIBUIÇÃO QUASE SIMETRICA, POIS O VALOR DE ASSIMETRIA ENCONTRADO (-0.13) É MENOR QUE ZERO E APRESENTA CURTOSE (-0.66) NEGATIVA.
