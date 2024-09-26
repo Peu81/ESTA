@@ -1,0 +1,43 @@
+import numpy as np
+import statistics as sts
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import seaborn as SNS
+import pandas as pd
+import scipy.stats as stats
+
+
+barra = '-' *25
+
+Iris = pd.read_csv('Iris.csv')
+
+iris_Setosa = Iris[Iris['Species'] == 'Iris-setosa']
+iris_Versicolor = Iris[Iris['Species'] == 'Iris-versicolor']
+iris_Virginica = Iris[Iris['Species'] == 'Iris-virginica']
+
+
+
+
+print('VARIÂNCIA IRIS-SETOSA:')
+variancias_I_setosa = iris_Setosa[['SepalLengthCm', 'SepalWidthCm','PetalLengthCm', 'PetalWidthCm']].var(ddof=1)
+print(round(variancias_I_setosa, 2))
+print()
+print('VARIÂNCIA IRIS-VERSICOLOR:')
+variancias_I_versicolor = iris_Versicolor[['SepalLengthCm', 'SepalWidthCm','PetalLengthCm', 'PetalWidthCm']].var(ddof=1)
+print(round(variancias_I_versicolor, 2))
+print()
+print('VARIÂNCIA IRIS-VIRGINICA: ')
+variancias_I_virginica = iris_Virginica[['SepalLengthCm', 'SepalWidthCm','PetalLengthCm', 'PetalWidthCm']].var(ddof=1)
+print(round(variancias_I_virginica, 2))
+
+SNS.boxplot(iris_Setosa[['SepalLengthCm', 'SepalWidthCm','PetalLengthCm', 'PetalWidthCm']])
+plt.title('Variância de Iris-setosa')
+plt.show()
+
+SNS.boxplot(iris_Versicolor[['SepalLengthCm', 'SepalWidthCm','PetalLengthCm', 'PetalWidthCm']])
+plt.title('Variância de Iris-versicolor')
+plt.show()
+
+SNS.boxplot(iris_Virginica[['SepalLengthCm', 'SepalWidthCm','PetalLengthCm', 'PetalWidthCm']])
+plt.title('Variância de Iris-virginica')
+plt.show()
