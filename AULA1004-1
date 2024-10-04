@@ -25,7 +25,7 @@ else:
   print('Não rejeitar a hipótese nula')
 
 
-#
+#AAAAAAAAAAAAAAA
 #import scikit_posthocs as sp 
 #posthoc_df = sp.posthoc_ttest([only_breast, only_formula, both]), equal_var=True, p_adjust='bonferroni')
 #group_names = ['only_breast', 'only_formula', 'both']
