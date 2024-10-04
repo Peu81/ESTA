@@ -1,3 +1,8 @@
+#APLICANDO T-TEST
+#ENTRE DUAS VARIAVEIS
+#H0: médias são iguais
+#H1: médias são diferentes
+
 #ESPECIFICO DO TTEST:
 ttest, p_value = stats.ttest_ind(sync, asyncr)
 print("P-valor", p_value)
@@ -19,3 +24,10 @@ if p_value < 0.05:
 else:
   print('Não rejeitar a hipótese nula')
 
+
+#
+#import scikit_posthocs as sp 
+#posthoc_df = sp.posthoc_ttest([only_breast, only_formula, both]), equal_var=True, p_adjust='bonferroni')
+#group_names = ['only_breast', 'only_formula', 'both']
+#posthoc_df.columns = group_names
+#posthoc_df.index = group_names
