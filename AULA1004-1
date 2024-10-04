@@ -1,0 +1,2 @@
+variancias_I_setosa = iris_Setosa[['SepalLengthCm', 'SepalWidthCm','PetalLengthCm', 'PetalWidthCm']].var(ddof=1)
+print(round(variancias_I_setosa, 2))
