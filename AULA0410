@@ -1,0 +1,39 @@
+from scipy.stats import levene
+
+test_stat_var, p_value_var = stats.levene(sync, asyncr)
+print("P-valor", p_value_var)
+if p_value_var < 0.05:
+  print('Rejeita a hipótese nula')
+else:
+  ('Falha ao rejeitar a hipótese nula')
+
+
+
+#ESPECIFICO DO TTEST:
+ttest, p_value = stats.ttest_ind(sync, asyncr)
+print("P-valor", p_value)
+print('se a hiótese for one-sided, use p_value/2')
+if p_value/2 < 0.05:
+  print('Rejeita a hipótese nula')
+else:
+  print('Não rejeita a hipótese nula')
+
+
+
+
+
+#as médias das populações do sincrono e do assincrono são diferentes, pois o resultado do teste de hipotese foi menor que 0.05.
+
+#PARAMETROS:
+#PRE-REQUISITOS
+
+
+#APLICANDO T-TEST
+#hipóteses
+#H0: médias são iguais
+#H1: médias são diferentes
+
+
+
+
+
