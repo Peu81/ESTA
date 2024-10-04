@@ -1,29 +1,12 @@
-import numpy as np
-import statistics as sts
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-import seaborn as SNS
-import pandas as pd
-import scipy.stats as stats
+#ESPECIFICO DO TTEST:
+ttest, p_value = stats.ttest_ind(sync, asyncr)
+print("P-valor", p_value)
+print('se a hiótese for one-sided, use p_value/2')
+if p_value/2 < 0.05:
+  print('Rejeita a hipótese nula')
+else:
+  print('Não rejeita a hipótese nula')
 
-
-only_breast=np.array([794.1, 716.9, 993. , 724.7, 760.9, 908.2, 659.3 , 690.8, 768.7, 717.3 , 630.7, 729.5, 
-             714.1, 810.3, 583.5, 679.9, 865.1])
-
-only_formula=np.array([ 898.8, 881.2, 940.2, 966.2, 957.5, 1061.7, 1046.2, 980.4, 895.6, 919.7, 1074.1, 952.5, 
-              796.3, 859.6, 871.1 , 1047.5, 919.1 , 1160.5, 996.9])
-
-both=np.array([976.4, 656.4, 861.2, 706.8, 718.5, 717.1, 759.8, 894.6, 867.6, 805.6, 765.4, 800.3, 789.9, 875.3, 
-      740. , 799.4, 790.3, 795.2 , 823.6, 818.7, 926.8, 791.7, 948.3])
-
-
-
-variancia1 = only_breast.var(ddof=1)
-print(round(variancia1))
-variancia2 = only_formula.var(ddof=1)
-print(round(variancia2))
-variancia3 = both.var(ddof=1)
-print(round(variancia3))
 
 #ANOVA - ANALISE DE VARIANCIA (TESTE PARAMÉTRICO)
 #H0: as médias são iguais
