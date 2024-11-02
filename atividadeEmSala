@@ -1,0 +1,68 @@
+import statistics as sts
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import seaborn as SNS
+import pandas as pd
+import scipy.stats as stats
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+barra = '-' *25
+
+Iris = pd.read_csv('Iris.csv')
+
+
+iris_Setosa = Iris[Iris['Species'] == 'Iris-setosa']
+iris_Versicolor = Iris[Iris['Species'] == 'Iris-versicolor']
+iris_Virginica = Iris[Iris['Species'] == 'Iris-virginica']
+
+compPetala_Setosa = iris_Setosa['PetalLengthCm']
+compPetala_Vesricolor = iris_Versicolor['PetalLengthCm']
+compPetala_Virginica = iris_Virginica['PetalLengthCm']
+
+
+compSepala_Setosa = iris_Setosa['SepalLengthCm']
+compSepala_Vesricolor = iris_Versicolor['SepalLengthCm']
+compSepala_Virginica = iris_Virginica['SepalLengthCm']
+
+largPetala_Setosa = iris_Setosa['PetalWidthCm']
+largPetala_Vesricolor = iris_Versicolor['PetalWidthCm']
+largPetala_Virginica = iris_Virginica['PetalWidthCm']
+
+
+largSepala_Setosa = iris_Setosa['PetalWidthCm']
+largSepala_Versicolor = iris_Versicolor['PetalWidthCm']
+largSepala_Virginica = iris_Virginica['PetalWidthCm']
+
+
+
+import statsmodels.api as sm
+
+# Ler o arquivo CSV
+
+
+# Suponha que você tenha duas colunas: 'X' e 'Y'
+iris_Setosa['SepalLengthCm'].to_numpy
+iris_Setosa['SepalWidthCm'].to_numpy
+
+xSetosa = np.array(iris_Setosa['SepalLengthCm']).reshape((-1,1))
+ySetosa = np.array(iris_Setosa['SepalWidthCm'])
+
+
+
+modelo = LinearRegression()
+modelo.fit(xSetosa, ySetosa)
+predicaoY = modelo.predict(xSetosa)
+
+print(modelo.coef_)
+print(modelo.intercept_)
+#print("Predição de Y: ",predicaoY)
+
+y = modelo.intercept_ + modelo.coef_
+
+
+rSq = modelo.score(xSetosa,ySetosa)
+print("Rsquare: ", rSq)
+
+ssr = sum(np.square(predicaoY - y))
+print("SSR", ssr)
