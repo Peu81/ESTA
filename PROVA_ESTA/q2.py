@@ -25,8 +25,15 @@ beta0 = modelo.intercept_
 beta1 = modelo.coef_[0]
 
 
-#y (medv) = beta0 (intercepto) + beta1 (coeficiente) * x1 ('rm') + erro
-print(f"Equação da regressão: MEDV = {beta0:.2f} + {beta1:.2f} * RM")
+print("EQUAÇÃO DA REGRESSÃO: ")
 
-predicao_medv_atual = modelo.intercept_ + (modelo.coef_ * x)
-predicao_medv_futura = modelo.intercept_ + (modelo.coef_ * (x + 1))
+print("y1o = -34.67 + 9.1 * x1")
+print("-y1 = 34.67 - 9.1 * (x1 + 1)")
+
+print("y2 = -34.67 + 9.1 * x1")
+print("-y1 = 34.67 - 9.1 * x1 - 9.1")
+
+print("y2 - y1 = + 9.1")
+print("y2 = y1 + 9.1")
+
+#Se aumentarmos em 1 a media do número de quartos, o valor medio aumentará em 9.1 
